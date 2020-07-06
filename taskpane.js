@@ -787,7 +787,7 @@ new r.Version("5.2.11");
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
- */},33:function(e,t){var n;n=function(){return this}();try{n=n||new Function("return this")()}catch(e){"object"==typeof window&&(n=window)}e.exports=n},352:function(e,t,n){"use strict";n(353);var r,i=n(381),o=n(377),s=(r=o)&&r.__esModule?r:{default:r};Office.initialize=function(){(0,i.platformBrowserDynamic)().bootstrapModule(s.default).catch((function(e){return console.error(e)})),$((function(){console.log("OK"),Office.context.document.customXmlParts.getByNamespaceAsync("datasourceDefinition",(function(e){console.log(e),"succeeded"===e.status&&0!==e.value.length||displayError("Error when trying to get datasource definition Custom XML Part by namespace from current template document")}))}))}},353:function(e,t,n){(function(e){(function(){"use strict";
+ */},33:function(e,t){var n;n=function(){return this}();try{n=n||new Function("return this")()}catch(e){"object"==typeof window&&(n=window)}e.exports=n},352:function(e,t,n){"use strict";n(353);var r,i=n(381),o=n(377),s=(r=o)&&r.__esModule?r:{default:r};Office.initialize=function(){(0,i.platformBrowserDynamic)().bootstrapModule(s.default).catch((function(e){return console.error(e)})),console.log("DOC NOT READY"),$((function(){console.log("DOC READY"),Office.context.document.customXmlParts.getByNamespaceAsync("datasourceDefinition",(function(e){console.log(e)}))}))}},353:function(e,t,n){(function(e){(function(){"use strict";
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
