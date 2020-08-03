@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Word Add-In with Commands Sample</title>
+    <script src="Totem/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/beta/hosted/office.js"></script>
+    <script>
+        var xpath = localStorage.getItem("xpath");
+
+        $(function () {
+            $("textarea[name='edit-xpath']").val(xpath);
+
+            $("input[id='submit-edit-xpath']").on("click", function () {
+                var xpath = $("textarea[name='edit-xpath']").val();
+                Office.context.ui.messageParent(xpath);
+            });
+        });
+    </script>
+</head>
+<body class="ms-Fabric" dir="ltr">
+    <textarea id="edit-xpath" name="edit-xpath" rows="10" style="width: 100%;"></textarea>
+    <input type="button" id="submit-edit-xpath" value="Modifier" />
+</body>
+</html>

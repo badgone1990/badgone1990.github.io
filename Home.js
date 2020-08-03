@@ -467,6 +467,8 @@
         //addOnClickEventHandler();
         //addEditXPathOnClickEventHandler();
 
+        debugger;
+
         testTemplate();
     });
 
