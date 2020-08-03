@@ -450,15 +450,20 @@
     }
 
     function testTemplate() {
-        $.ajax({
-            url: "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2086",
-            type: "POST",
-            headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NjQ1OTAzMywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.QTiB59vWpq8fmF5EGBZMwn9IGJVoB74Hw0lVVi2oyrrSt4kIVy8u5Ddzzu1geiKM9GqztTS5HhV-t8pojqYbEw"
-            }
-        }).done(function (response) {
-            console.log(response);
-        });
+        debugger; 
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.onload = function () {
+            var test = xhr.responseText;
+            debugger;
+        };
+
+        xhr.open("POST", "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2086");
+        xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NjQ1OTAzMywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.QTiB59vWpq8fmF5EGBZMwn9IGJVoB74Hw0lVVi2oyrrSt4kIVy8u5Ddzzu1geiKM9GqztTS5HhV-t8pojqYbEw");
+
+        xhr.send();
     }
 
     $(function () {
@@ -467,9 +472,37 @@
         //addOnClickEventHandler();
         //addEditXPathOnClickEventHandler();
 
-        debugger;
-
         testTemplate();
     });
 
 };
+
+
+
+
+
+function testTemplate() {
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.onload = function () {
+        var test = xhr.responseText;
+        debugger;
+    };
+
+    xhr.open("POST", "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2086");
+    xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NjQ1OTAzMywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.QTiB59vWpq8fmF5EGBZMwn9IGJVoB74Hw0lVVi2oyrrSt4kIVy8u5Ddzzu1geiKM9GqztTS5HhV-t8pojqYbEw");
+
+    xhr.send();
+}
+
+$(function () {
+    //checkIfCustomXMLPartsExist();
+    //generateDataDefinitionTree();
+    //addOnClickEventHandler();
+    //addEditXPathOnClickEventHandler();
+
+    debugger;
+
+    testTemplate();
+});
