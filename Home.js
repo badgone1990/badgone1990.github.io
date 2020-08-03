@@ -450,7 +450,7 @@
     }
 
     function testTemplate() {
-        debugger; 
+        debugger;
 
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
@@ -462,6 +462,8 @@
 
         xhr.open("POST", "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2086");
         xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NjQ1OTAzMywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.QTiB59vWpq8fmF5EGBZMwn9IGJVoB74Hw0lVVi2oyrrSt4kIVy8u5Ddzzu1geiKM9GqztTS5HhV-t8pojqYbEw");
+        xhr.setRequestHeader("Accept", "*/*");
+        xhr.setRequestHeader("Accept-Language", "fr-BE,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6");
 
         xhr.send();
     }
@@ -492,6 +494,8 @@ function testTemplate() {
 
     xhr.open("POST", "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2086");
     xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NjQ1OTAzMywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.QTiB59vWpq8fmF5EGBZMwn9IGJVoB74Hw0lVVi2oyrrSt4kIVy8u5Ddzzu1geiKM9GqztTS5HhV-t8pojqYbEw");
+    xhr.setRequestHeader("Accept", "*/*");
+    xhr.setRequestHeader("Accept-Language", "fr-BE,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6");
 
     xhr.send();
 }
