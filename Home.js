@@ -498,6 +498,7 @@ function testTemplate() {
 
 $(function () {
     //checkIfCustomXMLPartsExist();
+
     //generateDataDefinitionTree();
     //addOnClickEventHandler();
     //addEditXPathOnClickEventHandler();
