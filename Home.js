@@ -364,7 +364,7 @@
                                     var xml = result.value;
                                     var xPath = getXPathFromXMLByNodeId(xml, xPathRef);
 
-                                    $("#display-xpath").text(xPath);
+                                    $("#display-xpath").val(xPath);
                                 });
                             });
                         });
@@ -381,7 +381,7 @@
                         var xml = result.value;
                         var xPath = getXPathFromXMLByNodeId(xml, nodeId);
 
-                        $("#display-xpath").text(xPath);
+                        $("#display-xpath").val(xPath);
                     });
                 });
             });
@@ -426,21 +426,21 @@
 
     function addEditXPathOnClickEventHandler() {
         $("#edit-xpath").on("click", function () {
-            var xpath = $("#display-xpath").text();
+            var xpath = $("#display-xpath").val();
             if (xpath !== "undefined" && xpath !== "") {
                 localStorage.setItem("xpath", xpath);
 
                 var dialog;
                 Office.context.ui.displayDialogAsync(
-                    "https://localhost:44322/EditXPath.html",
-                    { height: 30, width: 50 },
+                    "http://localhost:64994/EditXPath.html",
+                    { height: 20, width: 50 },
                     function (asyncResult) {
                         dialog = asyncResult.value;
                         dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (arg) {
                             dialog.close();
 
                             var newXPath = arg.message;
-                            $("#display-xpath").text(newXPath);
+                            $("#display-xpath").val(newXPath);
                             updateOldXPathWithNewXPart(xpathsCustomXMLPartId, xpath, newXPath);
                         });
                     }
@@ -449,65 +449,63 @@
         });
     }
 
-    function testTemplate() {
-        debugger;
+    function addTestTemplateButtonClickEventHandler() {
+        $("#test-template").on("click", function () {
+            var dialog;
+            Office.context.ui.displayDialogAsync(
+                "https://localhost:44337/TestTemplate.html",
+                { height: 20, width: 50 },
+                function (asyncResult) {
+                    dialog = asyncResult.value;
+                    dialog.addEventHandler(Office.EventType.DialogMessageReceived, function (arg) {
+                        dialog.close();
 
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+                        var datasource = new Blob([arg.message], { type: 'text/xml' });
 
-        xhr.onload = function () {
-            var test = xhr.responseText;
-            debugger;
-        };
+                        var data = new FormData();
+                        data.append("document", datasource);
 
-        xhr.open("POST", "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2086");
-        xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NjQ1OTAzMywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.QTiB59vWpq8fmF5EGBZMwn9IGJVoB74Hw0lVVi2oyrrSt4kIVy8u5Ddzzu1geiKM9GqztTS5HhV-t8pojqYbEw");
-        xhr.setRequestHeader("Accept", "*/*");
-        xhr.setRequestHeader("Accept-Language", "fr-BE,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6");
+                        var xhr = new XMLHttpRequest();
+                        xhr.withCredentials = true;
+                        xhr.onload = function () {
+                            var file = xhr.response;
+                            var reader = new FileReader();
+                            reader.onloadend = function () {
+                                var base64 = reader.result
+                                    .replace('data:', '')
+                                    .replace(/^.+,/, '');
 
-        xhr.send();
+                                Word.run(function (context) {
+                                    var generateDocument = context.application.createDocument(base64);
+                                    generateDocument.open();
+
+                                    return context.sync();
+                                });
+                            };
+
+                            reader.readAsDataURL(file);
+                        };
+
+                        //xhr.open("POST", "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2735");
+                        xhr.open("POST", "https://localhost:44337/Proxy.ashx?http%3A%2F%2Fsvnsidvjv07%3A11300%2Ftotem%2Fapi%2Ftotem-client%2Ftest-template%2F2735");
+                        xhr.responseType = "blob";
+                        xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5ODUxOTc5MywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.VPmckreem2Gay190x1Bz-tGcm1aodTboSv-8jqP4cMIM5WKOYoK6OMYUcYpGv9uYa1t6hfq7z9HVaSfGyYo-ew");
+                        xhr.setRequestHeader("Accept", "*/*");
+                        xhr.setRequestHeader("Accept-Language", "fr-BE,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6");
+
+                        xhr.send(data);
+                    });
+                }
+            );
+        });
     }
 
     $(function () {
-        //checkIfCustomXMLPartsExist();
-        //generateDataDefinitionTree();
-        //addOnClickEventHandler();
-        //addEditXPathOnClickEventHandler();
-
-        testTemplate();
+        checkIfCustomXMLPartsExist();
+        generateDataDefinitionTree();
+        addOnClickEventHandler();
+        addEditXPathOnClickEventHandler();
+        addTestTemplateButtonClickEventHandler();
     });
 
 };
-
-
-
-
-
-function testTemplate() {
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
-    xhr.onload = function () {
-        var test = xhr.responseText;
-        debugger;
-    };
-
-    xhr.open("POST", "http://svnsidvjv07:11300/totem/api/totem-client/test-template/2086");
-    xhr.setRequestHeader("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTU5NjQ1OTAzMywiYXV0aCI6IkdST1VQX0FETUlOLFJPTEVfQURNSU4ifQ.QTiB59vWpq8fmF5EGBZMwn9IGJVoB74Hw0lVVi2oyrrSt4kIVy8u5Ddzzu1geiKM9GqztTS5HhV-t8pojqYbEw");
-    xhr.setRequestHeader("Accept", "*/*");
-    xhr.setRequestHeader("Accept-Language", "fr-BE,fr-FR;q=0.9,fr;q=0.8,en-US;q=0.7,en;q=0.6");
-
-    xhr.send();
-}
-
-$(function () {
-    //checkIfCustomXMLPartsExist();
-
-    //generateDataDefinitionTree();
-    //addOnClickEventHandler();
-    //addEditXPathOnClickEventHandler();
-
-    debugger;
-
-    testTemplate();
-});
